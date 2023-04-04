@@ -14,20 +14,26 @@ project:
   - us-west-1
   - us-west-2
 tests:
-  sample:
+  vpc-complete-all-possible-regions:
     parameters:
-      Param1: 'Inputs to Stack'
-      # Examples: of other taskcat dynamic input parameters for more into see http://taskcat.io
-      #
-      #      AvailabilityZones: $[taskcat_genaz_3]
-      #      ByteValue: 1
-      #      PasswordA: $[taskcat_genpass_8A]
-      #      PasswordB: $[taskcat_genpass_32S]
-      #      RandomNumber: $[taskcat_random-numbers]
-      #      RandomString: $[taskcat_random-string]
-      #      StackName: TestStack
-      #      UUID: $[taskcat_genuuid]
-      #
+      AvailabilityZones: $[taskcat_getaz_2]
+      CreateAdditionalPrivateSubnets: 'true'
+      CreatePrivateSubnets: 'true'
+      NumberOfAZs: '2'
+      PrivateSubnet1ACIDR: 10.0.0.0/19
+      PrivateSubnet1BCIDR: 10.0.192.0/21
+      PrivateSubnet2ACIDR: 10.0.32.0/19
+      PrivateSubnet2BCIDR: 10.0.200.0/21
+      PrivateSubnet3ACIDR: 10.0.64.0/19
+      PrivateSubnet3BCIDR: 10.0.208.0/21
+      PrivateSubnet4ACIDR: 10.0.96.0/19
+      PrivateSubnet4BCIDR: 10.0.216.0/21
+      PublicSubnet1CIDR: 10.0.128.0/20
+      PublicSubnet2CIDR: 10.0.144.0/20
+      PublicSubnet3CIDR: 10.0.160.0/20
+      PublicSubnet4CIDR: 10.0.176.0/20
+      VPCCIDR: 10.0.0.0/16
+      VPCTenancy: default
     regions:
     - us-east-2
-    template: templates/sample-workload.template.yaml
+    template: templates/aws-vpc.template.yaml
