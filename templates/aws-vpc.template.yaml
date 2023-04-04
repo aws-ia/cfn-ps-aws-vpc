@@ -5,6 +5,7 @@ Description: >-
   doesn't support NAT gateways, NAT instances are deployed instead. **WARNING** This template creates AWS resources. You will be billed for the AWS
   resources used if you create a stack from this template. (qs-1qnnspaap)
 Metadata:
+  cfn-lint: { config: { ignore_checks: [W9002, W9003, W9006] } }
   QuickStartDocumentation:
     EntrypointName: 'Launch a New VPC'
     OptionalParameters:
@@ -1305,6 +1306,15 @@ Resources:
   S3VPCEndpoint:
     Condition: PrivateSubnetsCondition
     Type: AWS::EC2::VPCEndpoint
+    Metadata:
+      cfn-lint:
+        config:
+          ignore_checks:
+            - EPolicyWildcardPrincipal
+            - EIAMPolicyActionWildcard
+          ignore_reasons:
+            EPolicyWildcardPrincipal: "This endpoint is used in a consolidated endpoint VPC. The endpoint resource policy is intentional open to give flexibilty for AWS service use."
+            EIAMPolicyActionWildcard: "This endpoint is used in a consolidated endpoint VPC. The endpoint resource policy is intentional open to give flexibilty for AWS service use."
     Properties:
       PolicyDocument:
         Version: '2012-10-17'
