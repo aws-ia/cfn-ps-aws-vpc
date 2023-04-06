@@ -108,7 +108,7 @@ tests:
       - us-west-1
       - us-west-2
     s3_bucket: ''
-    template: templates/aws-vpc.template.yaml
+    template: templates/aws-vpc.template.yaml.yaml
   vpc-public-all-possible-regions:
     parameters:
       AvailabilityZones: $[taskcat_getaz_2]
@@ -155,7 +155,7 @@ tests:
       - us-west-1
       - us-west-2
     s3_bucket: ''
-    template: templates/aws-vpc.template.yaml
+    template: templates/aws-vpc.template.yaml.yaml
   vpc-private-all-possible-regions:
     parameters:
       AvailabilityZones: $[taskcat_getaz_2]
@@ -202,7 +202,7 @@ tests:
       - us-west-1
       - us-west-2
     s3_bucket: ''
-    template: templates/aws-vpc.template.yaml
+    template: templates/aws-vpc.template.yaml.yaml
   3az-complete-all-possible-regions:
     parameters:
       AvailabilityZones: $[taskcat_getaz_3]
@@ -248,7 +248,7 @@ tests:
       ## - us-west-1
       - us-west-2
     s3_bucket: ''
-    template: templates/aws-vpc.template
+    template: templates/aws-vpc.template.yaml
   4az-complete-all-possible-regions:
     parameters:
       AvailabilityZones: $[taskcat_getaz_4]
@@ -294,7 +294,7 @@ tests:
       ## - us-west-1
       - us-west-2
     s3_bucket: ''
-    template: templates/aws-vpc.template
+    template: templates/aws-vpc.template.yaml
   4az-public-all-possible-regions:
     parameters:
       AvailabilityZones: $[taskcat_getaz_4]
@@ -340,4 +340,4 @@ tests:
       ## - us-west-1
       - us-west-2
     s3_bucket: ''
-    template: templates/aws-vpc.template
+    template: templates/aws-vpc.template.yaml
