@@ -299,6 +299,7 @@ tests:
     parameters:
       AvailabilityZones: $[taskcat_getaz_4]
       CreateAdditionalPrivateSubnets: 'false'
+      CreateNATGateways: 'false'
       CreatePrivateSubnets: 'false'
       NumberOfAZs: '4'
       PrivateSubnet1ACIDR: 10.0.0.0/19
