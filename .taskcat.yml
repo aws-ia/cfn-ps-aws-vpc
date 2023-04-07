@@ -30,4 +30,4 @@ tests:
       #
     regions:
     - us-east-2
-    template: templates/sample-workload.template.yaml
+    template: templates/another-workload.template.yaml
