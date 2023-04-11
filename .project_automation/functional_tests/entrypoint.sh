@@ -5,5 +5,22 @@
 PROJECT_PATH=${BASE_PATH}/project
 PROJECT_TYPE_PATH=${BASE_PATH}/projecttype
 
+##----------------------------------------------------
+## Download taskcat overrides from AWS Secrets Manager
+## ---------------------------------------------------
+## Create a 'secret' of type plaintext in AWS Secrets Manager 
+## and add taskcat override file contents to it.
+## Provide secret name to 'secret_name' parameter below and
+## the AWS region where you secret is stored to 'aws_region'.
+
+# set defaults
+secret_name="taskcat_overrides"
+secret_region="us-east-1"
+# retrieve the secret value as a JSON string
+overrides=$(aws secretsmanager get-secret-value --secret-id $secret_name --query SecretString --output text --region $secret_region)
+# convert the JSON string to YAML and save it to a file
+echo "$overrides" > .taskcat_overrides.yml
+##----------------------------------------------------
+
 # Run taskcat tests
 taskcat test run
