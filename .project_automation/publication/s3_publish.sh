@@ -30,12 +30,13 @@ prepare_aws_config(){
 
     # get aws config override file from secrets manager
     json_overrides=$(aws secretsmanager get-secret-value --secret-id ${secret_name} --query SecretString --output text --region ${secret_region})
-    
+
     # parse JSON using jq and iterate over each profile
     profiles=$(echo "${json_overrides}" | jq -r '.profiles | keys[]')
 
-    # redirect output to a file
-    echo -e "[profile default]\ncredential_process = cat \"${BASE_PATH}/.aws/temp-creds-default.json\"" > "${automation_scripts_path}aws_config.override"
+    # create default profile and redirect output to a file
+    default_credentials = $(cat "${BASE_PATH}/.aws/temp-creds-default.json")
+    echo -e "[profile default]\ncredential_process = ${default_credentials}" > "${automation_scripts_path}aws_config.override"
 
     for profile in ${profiles}
     do
@@ -61,5 +62,5 @@ export AWS_CONFIG_FILE="${automation_scripts_path}aws_config.override"
 cat ${AWS_CONFIG_FILE}
 cat "${automation_scripts_path}tmp.yml"
 
-# push to S3 buckets
-taskcat -d upload -p ${project_root} -c "${automation_scripts_path}tmp.yml" --exclude-prefix doc/ #--dry-run
+# push to regional S3 buckets
+export TASKCAT_PROJECT_S3_REGIONAL_BUCKETS=true; taskcat -d upload -p ${project_root} -c "${automation_scripts_path}tmp.yml" --exclude-prefix doc/ #--dry-run
